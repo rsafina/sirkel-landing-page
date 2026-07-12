@@ -23,7 +23,7 @@
     />
     <style>
       :root {
-        --bg: #f8f6f2;
+        --bg: #f5fbff;
         --card: #ffffff;
         --gold: #c8a96b;
         --primary: #5596ce;
@@ -65,6 +65,17 @@
 
       /* ===== Image placeholder style ===== */
       .img-placeholder {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--text-sec);
+        font-size: 0.85rem;
+      }
+      .img-placeholder:not(:has(img)) {
         background: repeating-linear-gradient(
           45deg,
           #eee9df,
@@ -73,14 +84,20 @@
           #f4f0e8 24px
         );
         border: 2px dashed var(--gold);
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: var(--text-sec);
-        font-size: 0.85rem;
         padding: 16px;
+      }
+      .img-placeholder:has(img) {
+        background: #ffffff;
+        border: 1px solid #e8e2d6;
+        padding: 0;
+      }
+      .img-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+        background: #ffffff;
       }
 
       /* ===== Nav ===== */
@@ -88,7 +105,7 @@
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(248, 246, 242, 0.92);
+        background: #ffffff;
         backdrop-filter: blur(8px);
         border-bottom: 1px solid #e8e2d6;
       }
@@ -106,10 +123,11 @@
         gap: 10px;
       }
       .nav-logo img {
-        height: auto;
-        width: 180px;
+        height: 40px;
+        width: 170px;
         max-width: 100%;
         object-fit: contain;
+        display: block;
       }
       .nav-links {
         display: flex;
@@ -442,6 +460,7 @@
       /* ===== Footer ===== */
       footer {
         padding: 40px 0 32px;
+        background: #ffffff;
       }
       .footer-inner {
         display: flex;
@@ -453,10 +472,11 @@
         padding-top: 28px;
       }
       .footer-inner img {
-        height: auto;
-        width: 150px;
+        height: 34px;
+        width: 130px;
         max-width: 100%;
         object-fit: contain;
+        display: block;
       }
       footer p,
       footer a {
@@ -555,7 +575,7 @@
             Kelola Tamu & Membership Restoran Anda dalam <em>Satu Platform</em>
           </h1>
           <p>
-            SIRKEL membantu restoran mengelola reservasi, waiting list, dan
+            SIRKEL membantu restoran mengelola reservasi, quick walk-ins, dan
             program loyalitas pelanggan — sehingga tim Anda bisa fokus
             memberikan pengalaman terbaik untuk setiap tamu.
           </p>
@@ -565,10 +585,8 @@
           </div>
         </div>
         <!-- PLACEHOLDER: Gambar hero — screenshot dashboard SIRKEL di laptop/tablet, atau ilustrasi host restoran menyambut tamu dengan tablet di tangan. Rasio 4:3. -->
-        <div class="img-placeholder hero-visual">
-          [GAMBAR HERO]<br />Screenshot dashboard SIRKEL di perangkat
-          tablet/laptop, atau foto host restoran menyambut tamu sambil memegang
-          tablet. Rasio 4:3.
+        <div class="hero-visual">
+          <img src="assets/hero.png" alt="Screenshot dashboard SIRKEL" />
         </div>
       </div>
     </header>
@@ -606,11 +624,10 @@
           </div>
           <div class="feature-card">
             <div class="feature-icon">⏱️</div>
-            <h3>Waiting List Digital</h3>
+            <h3>Quick Walk-Ins</h3>
             <p>
-              Kelola antrean walk-in secara rapi. Tamu tahu estimasi waktu
-              tunggu, staf tahu urutan yang tepat — tanpa kertas dan
-              kebingungan.
+              Kelola walk-in secara rapi. Staff bisa memasukkan data walk in
+              dengan cepat dan akurat.
             </p>
           </div>
           <div class="feature-card">
@@ -701,8 +718,7 @@
           <figure class="shot">
             <!-- PLACEHOLDER: Screenshot halaman guest book / daftar reservasi dari gms-proto. Rasio 16:10. -->
             <div class="img-placeholder">
-              [SCREENSHOT 1]<br />Halaman Guest Book / daftar reservasi. Rasio
-              16:10.
+              <img src="assets/dashboard.png" alt="Screenshot Guest Book" />
             </div>
             <figcaption>
               Guest Book — semua reservasi hari ini dalam satu layar
@@ -711,7 +727,7 @@
           <figure class="shot">
             <!-- PLACEHOLDER: Screenshot halaman membership / profil tamu dari gms-proto. Rasio 16:10. -->
             <div class="img-placeholder">
-              [SCREENSHOT 2]<br />Halaman Membership / profil tamu. Rasio 16:10.
+              <img src="assets/membership.png" alt="Screenshot Membership" />
             </div>
             <figcaption>
               Membership — riwayat kunjungan dan status member
@@ -726,8 +742,10 @@
       <div class="container benefits-grid">
         <!-- PLACEHOLDER: Foto suasana restoran yang ramai namun teratur, atau staf yang tersenyum melayani tamu. Orientasi portrait 3:4. -->
         <div class="img-placeholder benefit-visual">
-          [GAMBAR KEUNGGULAN]<br />Foto suasana restoran ramai namun teratur,
-          atau staf tersenyum melayani tamu. Portrait 3:4.
+          <image
+            src="assets/ramai.png"
+            alt="Suasana restoran yang ramai namun teratur"
+          />
         </div>
         <div>
           <div
@@ -751,8 +769,8 @@
             <div>
               <h3>Satu Sistem, Bukan Lima</h3>
               <p>
-                Reservasi, waiting list, dan membership tergabung dalam satu
-                platform — tidak perlu berpindah-pindah aplikasi.
+                Reservasi, walk in, dan membership tergabung dalam satu platform
+                — tidak perlu berpindah-pindah aplikasi.
               </p>
             </div>
           </div>
