@@ -3,35 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SIRKEL — Sistem Manajemen Tamu & Membership untuk Restoran</title>
+    <title>SIRKEL, Sistem Manajemen Tamu & Membership untuk Restoran</title>
     <meta
       name="description"
-      content="SIRKEL membantu restoran mengelola reservasi, waiting list, dan program membership dalam satu platform. Hubungi tim sales kami untuk demo."
+      content="SIRKEL membantu restoran mengelola reservasi, walk-in, dan program membership dalam satu dashboard. Hubungi tim kami untuk demo."
     />
     <link
       rel="icon"
-      href="assets/sirkel-oval.png"
+      href="assets/sirkel-new-icon.png"
       sizes="50x50"
       type="image/png"
     />
-    <link rel="apple-touch-icon" href="assets/sirkel-oval.png" />
+    <link rel="apple-touch-icon" href="assets/sirkel-new-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #f5fbff;
-        --card: #ffffff;
+        --bg: #fbf8f2;
+        --bg-alt: #f2f7fb;
+        --bg-soft: #f8f1e7;
+        --card: rgba(255, 255, 255, 0.88);
         --gold: #c8a96b;
-        --primary: #5596ce;
-        --primary-hover: #85c5e9;
+        --gold-dark: #b8954f;
+        --primary: #6b9bc2;
+        --primary-dark: #28547c;
+        --primary-hover: #8db7dd;
         --success: #5f8d4e;
-        --text: #222222;
-        --text-sec: #666666;
+        --text: #22313f;
+        --text-sec: #5d6874;
         --warning: #d4a017;
+        --danger: #c0554a;
       }
       * {
         margin: 0;
@@ -43,7 +48,7 @@
       }
       body {
         font-family: "DM Sans", sans-serif;
-        background: var(--bg);
+        background: #fbf8f2;
         color: var(--text);
         line-height: 1.6;
       }
@@ -51,14 +56,16 @@
       h2,
       h3 {
         font-family: "Cormorant Garamond", serif;
-        line-height: 1.2;
+        line-height: 1.15;
+        font-weight: 700;
+        color: var(--primary-dark);
       }
       img {
         max-width: 100%;
         display: block;
       }
       .container {
-        max-width: 1080px;
+        max-width: 1120px;
         margin: 0 auto;
         padding: 0 20px;
       }
@@ -67,7 +74,7 @@
       .img-placeholder {
         position: relative;
         overflow: hidden;
-        border-radius: 16px;
+        border-radius: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -76,13 +83,7 @@
         font-size: 0.85rem;
       }
       .img-placeholder:not(:has(img)) {
-        background: repeating-linear-gradient(
-          45deg,
-          #eee9df,
-          #eee9df 12px,
-          #f4f0e8 12px,
-          #f4f0e8 24px
-        );
+        background: #f4f0e8;
         border: 2px dashed var(--gold);
         padding: 16px;
       }
@@ -94,10 +95,13 @@
       .img-placeholder img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        object-position: center;
+        object-fit: cover;
+        object-position: top center;
         display: block;
         background: #ffffff;
+      }
+      .img-placeholder.contain img {
+        object-fit: contain;
       }
 
       /* ===== Nav ===== */
@@ -105,7 +109,7 @@
         position: sticky;
         top: 0;
         z-index: 50;
-        background: #ffffff;
+        background: rgba(255, 255, 255, 0.92);
         backdrop-filter: blur(8px);
         border-bottom: 1px solid #e8e2d6;
       }
@@ -114,7 +118,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 12px 20px;
-        max-width: 1080px;
+        max-width: 1120px;
         margin: 0 auto;
       }
       .nav-logo {
@@ -132,12 +136,13 @@
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 26px;
       }
       .nav-links a {
         color: var(--text);
         text-decoration: none;
         font-size: 0.95rem;
+        font-weight: 500;
       }
       .nav-links a:hover {
         color: var(--primary);
@@ -146,35 +151,38 @@
         display: inline-block;
         background: var(--primary);
         color: #fff !important;
-        padding: 12px 28px;
+        padding: 13px 28px;
         border-radius: 999px;
         text-decoration: none;
         font-weight: 700;
         font-size: 1rem;
-        transition: background 0.2s;
+        transition:
+          background 0.2s,
+          transform 0.15s;
         border: none;
         cursor: pointer;
       }
       .btn:hover {
         background: var(--primary-hover);
+        transform: translateY(-1px);
       }
       .btn-outline {
         background: transparent;
-        color: var(--primary) !important;
-        border: 2px solid var(--primary);
+        color: var(--primary-dark) !important;
+        border: 2px solid var(--primary-dark);
       }
       .btn-outline:hover {
-        background: var(--primary);
+        background: var(--primary-dark);
         color: #fff !important;
       }
       .btn-gold {
         background: var(--gold);
       }
       .btn-gold:hover {
-        background: #d8bd85;
+        background: var(--gold-dark);
       }
       .nav-links .btn {
-        padding: 9px 20px;
+        padding: 10px 22px;
         font-size: 0.9rem;
       }
       .hamburger {
@@ -188,113 +196,305 @@
 
       /* ===== Hero ===== */
       .hero {
-        padding: 72px 0 56px;
+        padding: 76px 0 60px;
+        position: relative;
+        overflow: hidden;
+        background: url("assets/holographic-abstract-background.avif") center
+          center / cover no-repeat;
+        background-color: #f8f5ed;
+        isolation: isolate;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
       }
       .hero-grid {
         display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
+        grid-template-columns: 1.05fr 0.95fr;
         gap: 48px;
         align-items: center;
+        position: relative;
+        z-index: 1;
       }
       .eyebrow {
-        color: var(--gold);
+        display: inline-block;
+        color: #fffefb;
         font-weight: 700;
-        letter-spacing: 2px;
+        letter-spacing: 1.5px;
         text-transform: uppercase;
-        font-size: 0.8rem;
-        margin-bottom: 12px;
+        font-size: 0.78rem;
+        margin-bottom: 14px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.38);
+        padding: 6px 14px;
+        border-radius: 999px;
+        backdrop-filter: blur(6px);
       }
       .hero h1 {
-        font-size: 3.2rem;
-        margin-bottom: 18px;
+        font-size: 3.4rem;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+        color: #ffffff;
+        text-shadow: 0 3px 18px rgba(11, 28, 47, 0.35);
       }
       .hero h1 em {
-        color: var(--primary);
+        color: #f5d092;
         font-style: normal;
       }
-      .hero p {
-        color: var(--text-sec);
-        font-size: 1.1rem;
-        margin-bottom: 28px;
-        max-width: 480px;
+      .hero p.lead {
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 1.12rem;
+        margin-bottom: 30px;
+        max-width: 500px;
+        text-shadow: 0 2px 12px rgba(11, 28, 47, 0.24);
       }
       .hero-ctas {
         display: flex;
         gap: 14px;
         flex-wrap: wrap;
+        margin-bottom: 28px;
       }
       .hero-visual {
         aspect-ratio: 4/3;
+        background: rgba(255, 255, 255, 0.48);
+        box-shadow: 0 12px 30px rgba(40, 84, 124, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(8px);
+      }
+      .hero-note {
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 0.85rem;
+        text-shadow: 0 2px 10px rgba(11, 28, 47, 0.18);
       }
 
-      /* ===== Trust bar ===== */
-      .trust {
-        padding: 20px 0 8px;
-        text-align: center;
+      /* ===== Value strip ===== */
+      .value-strip {
+        position: relative;
+        background: #fff;
+        padding: 22px 0;
       }
-      .trust p {
-        color: var(--text-sec);
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 16px;
-      }
-      .trust-logos {
-        display: flex;
-        justify-content: center;
+      .value-strip .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
-        flex-wrap: wrap;
       }
-      .trust-logos .img-placeholder {
-        width: 120px;
-        height: 48px;
+      .value-strip-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-align: center;
+        color: var(--text-sec);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .value-strip-icon {
+        width: 26px;
+        height: 26px;
         border-radius: 8px;
-        font-size: 0.7rem;
-        padding: 6px;
+        flex-shrink: 0;
+        border: 1.5px dashed var(--gold);
+        background: #f4ead9;
+      }
+      @media (max-width: 820px) {
+        .value-strip .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .value-strip .container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ===== Seamless section transitions =====
+         A short band straddles the boundary between two sections,
+         half sits over the end of the previous section, half over the
+         start of this one, and fades the previous section's colour
+         out. That keeps the blend centred right on the seam instead of
+         reading as its own big gradient block. Footer is excluded.
+         NOTE: gradient stops use matching RGB with alpha 0 at the end
+         (not the "transparent" keyword), mixing a solid colour with
+         literal "transparent" interpolates through transparent BLACK
+         in most browsers, which produces a muddy grey band. */
+      .seam {
+        position: relative;
+      }
+      .seam::before {
+        content: "";
+        position: absolute;
+        top: -14px;
+        left: 0;
+        right: 0;
+        height: 28px;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .seam > * {
+        position: relative;
+        z-index: 1;
+      }
+      .seam-from-cream::before {
+        background: none;
+      }
+      .seam-from-white::before {
+        background: none;
+      }
+      .seam-from-navy::before {
+        background: none;
+      }
+      .seam-from-bg-alt::before {
+        background: none;
+      }
+      /* Wider, softer variant, used where the two colours contrast a
+         lot (e.g. white <-> navy) so the eye still reads a gradual
+         wash of blue rather than a hard edge, without losing the
+         colour entirely. Eased stops keep it fuller for longer before
+         tapering off. */
+      .seam-wide::before {
+        top: -70px;
+        height: 140px;
+      }
+      .seam-wide.seam-from-white::before {
+        background: none;
+      }
+      .seam-wide.seam-from-navy::before {
+        background: none;
       }
 
       /* ===== Sections ===== */
       section {
-        padding: 64px 0;
+        padding: 72px 0;
       }
       .section-head {
         text-align: center;
-        max-width: 620px;
+        max-width: 640px;
         margin: 0 auto 48px;
       }
+      .section-head .eyebrow {
+        margin-bottom: 10px;
+      }
       .section-head h2 {
-        font-size: 2.4rem;
-        margin-bottom: 12px;
+        font-size: 2.5rem;
+        margin-bottom: 14px;
       }
       .section-head p {
         color: var(--text-sec);
+        font-size: 1.05rem;
       }
 
-      /* ===== Features ===== */
+      /* ===== Problem / agitate ===== */
+      .problem {
+        background: #ffffff;
+        padding: 120px 0;
+        color: var(--text);
+      }
+      @media (max-width: 768px) {
+        .problem {
+          padding: 90px 0;
+        }
+      }
+      .problem h2,
+      .problem .section-head p {
+        color: var(--primary-dark);
+      }
+      .problem .section-head p {
+        opacity: 0.8;
+      }
+      .problem-grid {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 44px;
+        align-items: center;
+      }
+      .problem-visual {
+        aspect-ratio: 3/4;
+        max-height: 440px;
+      }
+      .problem-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .problem-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(40, 84, 124, 0.12);
+        border-radius: 14px;
+        padding: 16px 18px;
+        box-shadow: 0 8px 24px rgba(40, 84, 124, 0.06);
+        backdrop-filter: blur(8px);
+      }
+      .problem-item .mark {
+        flex-shrink: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(212, 160, 23, 0.22);
+        color: var(--gold-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+      .problem-item p {
+        margin: 0;
+        color: var(--text-sec);
+        font-size: 0.98rem;
+      }
+      .problem-item strong {
+        color: var(--primary-dark);
+      }
+      .problem-punch {
+        margin-top: 28px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+      .problem-punch em {
+        color: var(--gold-dark);
+        font-style: normal;
+      }
+
+      /* ===== Core features ===== */
       .features-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
       }
       .feature-card {
-        background: var(--card);
-        border-radius: 16px;
-        padding: 28px 24px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        background: rgba(255, 255, 255, 0.78);
+        border-radius: 18px;
+        padding: 30px 26px;
+        box-shadow: 0 10px 30px rgba(40, 84, 124, 0.05);
+        border: 1px solid rgba(40, 84, 124, 0.1);
+        backdrop-filter: blur(8px);
       }
       .feature-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        background: var(--bg);
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        background: var(--primary);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
-        margin-bottom: 16px;
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+      }
+      .feature-icon.gold {
+        background: var(--gold);
+      }
+      .feature-icon.dark {
+        background: var(--primary-dark);
       }
       .feature-card h3 {
-        font-size: 1.35rem;
+        font-size: 1.4rem;
         margin-bottom: 8px;
       }
       .feature-card p {
@@ -302,21 +502,135 @@
         font-size: 0.95rem;
       }
 
+      /* ===== Feature spotlight (zigzag) ===== */
+      .spotlight {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+        padding: 46px 0;
+      }
+      .spotlight:not(:last-child) {
+        border-bottom: 1px solid #e8e2d6;
+      }
+      .spotlight.reverse .spotlight-text {
+        order: 2;
+      }
+      .spotlight.reverse .spotlight-visual {
+        order: 1;
+      }
+      .spotlight-tag {
+        display: inline-block;
+        color: var(--primary);
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+      }
+      .spotlight-text h3 {
+        font-size: 2rem;
+        margin-bottom: 14px;
+      }
+      .spotlight-text p {
+        color: var(--text-sec);
+        font-size: 1.02rem;
+        margin-bottom: 16px;
+      }
+      .spotlight-text ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .spotlight-text ul li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: var(--text-sec);
+        font-size: 0.95rem;
+      }
+      .spotlight-text ul li .chk {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--success);
+        color: #fff;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+      }
+      .spotlight-visual {
+        aspect-ratio: 16/10;
+      }
+      .spotlight-visual.tall {
+        aspect-ratio: 4/3;
+      }
+      .spotlight figcaption {
+        text-align: center;
+        color: var(--text-sec);
+        font-size: 0.85rem;
+        margin-top: 10px;
+      }
+
+      /* ===== More features grid ===== */
+      .more-features {
+        background: rgba(248, 241, 231, 0.88);
+      }
+      .more-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px 32px;
+      }
+      .more-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .more-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid #e0ddd7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+      }
+      .more-item h4 {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.02rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: var(--text);
+      }
+      .more-item p {
+        color: var(--text-sec);
+        font-size: 0.9rem;
+      }
+
       /* ===== How it works ===== */
       .how {
-        background: var(--card);
+        background: #ffffff;
       }
       .how-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 32px;
+        position: relative;
       }
       .step {
         text-align: center;
+        position: relative;
       }
       .step-num {
-        width: 44px;
-        height: 44px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
         background: var(--primary);
         color: #fff;
@@ -324,11 +638,12 @@
         align-items: center;
         justify-content: center;
         font-weight: 700;
-        font-size: 1.1rem;
-        margin: 0 auto 16px;
+        font-size: 1.15rem;
+        margin: 0 auto 18px;
+        font-family: "Cormorant Garamond", serif;
       }
       .step h3 {
-        font-size: 1.3rem;
+        font-size: 1.35rem;
         margin-bottom: 8px;
       }
       .step p {
@@ -336,42 +651,26 @@
         font-size: 0.95rem;
       }
 
-      /* ===== Screenshots ===== */
-      .shots-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-      }
-      .shot .img-placeholder {
-        aspect-ratio: 16/10;
-        margin-bottom: 10px;
-      }
-      .shot figcaption {
-        text-align: center;
-        color: var(--text-sec);
-        font-size: 0.9rem;
-      }
-
-      /* ===== Benefits ===== */
+      /* ===== Benefits / keunggulan ===== */
       .benefits-grid {
         display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
-        gap: 48px;
-        align-items: center;
-      }
-      .benefit-visual {
-        aspect-ratio: 3/4;
-        max-height: 420px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
       }
       .benefit-item {
         display: flex;
         gap: 16px;
-        margin-bottom: 24px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(40, 84, 124, 0.1);
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow: 0 8px 24px rgba(40, 84, 124, 0.05);
+        backdrop-filter: blur(8px);
       }
       .benefit-check {
         flex-shrink: 0;
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         background: var(--success);
         color: #fff;
@@ -381,28 +680,35 @@
         font-size: 0.9rem;
       }
       .benefit-item h3 {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         margin-bottom: 4px;
       }
       .benefit-item p {
         color: var(--text-sec);
-        font-size: 0.95rem;
+        font-size: 0.93rem;
       }
 
-      /* ===== Testimonial ===== */
+      /* ===== Testimonial (template) ===== */
       .testi {
-        background: var(--card);
+        background: #f6f7fb;
       }
       .testi-card {
         max-width: 720px;
         margin: 0 auto;
         text-align: center;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px dashed rgba(200, 169, 107, 0.75);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(40, 84, 124, 0.05);
+        backdrop-filter: blur(8px);
       }
       .testi-card blockquote {
         font-family: "Cormorant Garamond", serif;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         font-style: italic;
-        margin-bottom: 24px;
+        margin-bottom: 22px;
+        color: var(--text-sec);
       }
       .testi-person {
         display: flex;
@@ -425,23 +731,60 @@
         font-size: 0.9rem;
       }
 
+      /* ===== FAQ ===== */
+      .faq-list {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        border-bottom: 1px solid #e8e2d6;
+      }
+      .faq-item summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 20px 4px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary-dark);
+      }
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-item summary .arrow {
+        transition: transform 0.2s;
+        color: var(--gold-dark);
+        flex-shrink: 0;
+        margin-left: 16px;
+      }
+      .faq-item[open] summary .arrow {
+        transform: rotate(180deg);
+      }
+      .faq-item p {
+        color: var(--text-sec);
+        padding: 0 4px 20px;
+        font-size: 0.96rem;
+      }
+
       /* ===== CTA / Contact ===== */
       .cta-section {
-        background: linear-gradient(135deg, var(--primary), #3d7cb0);
+        background: var(--primary-dark);
         color: #fff;
-        border-radius: 24px;
-        padding: 56px 40px;
+        border-radius: 26px;
+        padding: 60px 40px;
         text-align: center;
-        margin: 0 20px;
       }
       .cta-section h2 {
-        font-size: 2.4rem;
-        margin-bottom: 12px;
+        color: #fff;
+        font-size: 2.5rem;
+        margin-bottom: 14px;
       }
       .cta-section p {
-        opacity: 0.9;
-        max-width: 520px;
-        margin: 0 auto 28px;
+        opacity: 0.92;
+        max-width: 540px;
+        margin: 0 auto 30px;
       }
       .cta-buttons {
         display: flex;
@@ -459,7 +802,7 @@
 
       /* ===== Footer ===== */
       footer {
-        padding: 40px 0 32px;
+        padding: 44px 0 32px;
         background: #ffffff;
       }
       .footer-inner {
@@ -495,22 +838,31 @@
       /* ===== Mobile ===== */
       @media (max-width: 820px) {
         .hero h1 {
-          font-size: 2.3rem;
+          font-size: 2.4rem;
         }
         .hero-grid,
-        .benefits-grid {
-          grid-template-columns: 1fr;
-          gap: 32px;
-        }
+        .problem-grid,
+        .benefits-grid,
+        .spotlight,
+        .more-grid,
         .features-grid,
-        .how-grid,
-        .shots-grid {
+        .how-grid {
           grid-template-columns: 1fr;
         }
-        .benefit-visual {
-          max-height: 300px;
-          aspect-ratio: 16/10;
+        .spotlight {
+          gap: 24px;
+          padding: 30px 0;
+        }
+        .spotlight.reverse .spotlight-text,
+        .spotlight.reverse .spotlight-visual {
+          order: initial;
+        }
+        .problem-visual {
+          max-height: 280px;
           order: -1;
+        }
+        .value-strip .container {
+          gap: 18px;
         }
         .hamburger {
           display: block;
@@ -548,7 +900,7 @@
     <nav>
       <div class="nav-inner">
         <div class="nav-logo">
-          <img src="assets/sirkel.png" alt="SIRKEL logo" />
+          <img src="assets/sirkel-new-logo.png" alt="SIRKEL logo" />
         </div>
         <button
           class="hamburger"
@@ -560,8 +912,8 @@
         <div class="nav-links" id="navLinks">
           <a href="#fitur">Fitur</a>
           <a href="#cara-kerja">Cara Kerja</a>
-          <a href="#keunggulan">Keunggulan</a>
-          <a href="#kontak" class="btn">Hubungi Sales</a>
+          <a href="#faq">FAQ</a>
+          <a href="#kontak" class="btn">Hubungi Kami</a>
         </div>
       </div>
     </nav>
@@ -570,106 +922,364 @@
     <header class="hero">
       <div class="container hero-grid">
         <div>
-          <p class="eyebrow">Untuk Restoran & Hospitality</p>
-          <h1>
-            Kelola Tamu & Membership Restoran Anda dalam <em>Satu Platform</em>
-          </h1>
-          <p>
-            SIRKEL membantu restoran mengelola reservasi, quick walk-ins, dan
-            program loyalitas pelanggan — sehingga tim Anda bisa fokus
-            memberikan pengalaman terbaik untuk setiap tamu.
+          <p class="eyebrow">Guest & Membership Management</p>
+          <h1>Capek Kehilangan Jejak Tamu Setiap <em>Jam Sibuk?</em></h1>
+          <p class="lead">
+            Reservasi di buku catatan, walk-in ketulis di kertas, data member
+            entah di mana, SIRKEL menyatukan semuanya jadi satu dashboard,
+            supaya restoran Anda nggak pernah lagi kehilangan jejak tamu.
           </p>
           <div class="hero-ctas">
-            <a href="#kontak" class="btn">Hubungi Sales</a>
+            <a href="#kontak" class="btn">Coba SIRKEL Sekarang</a>
             <a href="#fitur" class="btn btn-outline">Lihat Fitur</a>
           </div>
         </div>
-        <!-- PLACEHOLDER: Gambar hero — screenshot dashboard SIRKEL di laptop/tablet, atau ilustrasi host restoran menyambut tamu dengan tablet di tangan. Rasio 4:3. -->
+        <!-- PLACEHOLDER: Gambar hero, host/staff restoran menyambut tamu sambil memegang tablet berisi SIRKEL, atau mockup dashboard di laptop. Rasio 4:3. Bisa diganti dengan AI image nanti. -->
         <div class="img-placeholder hero-visual">
-          <img src="assets/hero.png" alt="Screenshot dashboard SIRKEL" />
+          <img
+            src="assets/hero.png"
+            alt="Host restoran menyambut tamu sambil membawa tablet SIRKEL"
+          />
         </div>
       </div>
     </header>
 
-    <!-- ===== TRUST BAR ===== -->
-    <div class="trust container">
-      <p>Dipercaya oleh restoran di berbagai kota</p>
-      <div class="trust-logos">
-        <!-- PLACEHOLDER: Logo-logo klien/restoran partner. Jika belum ada klien, section ini bisa dihapus. -->
-        <div class="img-placeholder">[Logo Klien 1]</div>
-        <div class="img-placeholder">[Logo Klien 2]</div>
-        <div class="img-placeholder">[Logo Klien 3]</div>
-        <div class="img-placeholder">[Logo Klien 4]</div>
+    <!-- ===== VALUE STRIP ===== -->
+    <!-- PLACEHOLDER: Ganti div.value-strip-icon di bawah dengan ikon asli (SVG/PNG kecil, transparan, ~26x26) untuk tiap poin. -->
+    <div class="value-strip seam seam-from-cream">
+      <div class="container">
+        <div class="value-strip-item">
+          <span class="value-strip-icon" aria-hidden="true"></span> Walk-in
+          tercatat dalam hitungan detik
+        </div>
+        <div class="value-strip-item">
+          <span class="value-strip-icon" aria-hidden="true"></span> Reservasi &
+          walk-in dalam satu layar
+        </div>
+        <div class="value-strip-item">
+          <span class="value-strip-icon" aria-hidden="true"></span> Tidak pernah
+          lupa ulang tahun tamu
+        </div>
+        <div class="value-strip-item">
+          <span class="value-strip-icon" aria-hidden="true"></span> Data tamu
+          tersimpan aman
+        </div>
       </div>
     </div>
 
-    <!-- ===== FITUR ===== -->
-    <section id="fitur">
+    <!-- ===== PROBLEM / AGITATE ===== -->
+    <section class="problem">
       <div class="container">
         <div class="section-head">
-          <h2>Semua yang Restoran Anda Butuhkan</h2>
+          <p
+            class="eyebrow"
+            style="background: rgba(255, 255, 255, 0.12); color: #f4c76a"
+          >
+            Kedengaran Familiar?
+          </p>
+          <h2>Ini yang biasanya terjadi tanpa sistem yang tepat</h2>
           <p>
-            Dari tamu datang hingga menjadi pelanggan setia — SIRKEL menangani
-            seluruh perjalanannya.
+            Kalau salah satu dari ini kejadian di restoran Anda minggu ini, Anda
+            nggak sendirian.
           </p>
         </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📋</div>
-            <h3>Manajemen Reservasi</h3>
-            <p>
-              Catat dan kelola reservasi dengan mudah. Pantau status meja secara
-              real-time dan hindari double booking di jam sibuk.
-            </p>
+        <div class="problem-grid">
+          <!-- PLACEHOLDER: Foto suasana restoran ramai / hectic saat jam sibuk. Rasio 3:4. -->
+          <div class="img-placeholder problem-visual">
+            <img
+              src="assets/ramai.png"
+              alt="Suasana restoran yang ramai saat jam sibuk"
+            />
           </div>
-          <div class="feature-card">
-            <div class="feature-icon">⏱️</div>
-            <h3>Quick Walk-Ins</h3>
-            <p>
-              Kelola walk-in secara rapi. Staff bisa memasukkan data walk in
-              dengan cepat dan akurat.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">⭐</div>
-            <h3>Program Membership</h3>
-            <p>
-              Bangun loyalitas pelanggan dengan sistem membership sederhana.
-              Lacak kunjungan dan berikan benefit untuk pelanggan setia Anda.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">👤</div>
-            <h3>Profil Tamu Lengkap</h3>
-            <p>
-              Kenali tamu Anda: riwayat kunjungan, preferensi, dan catatan
-              khusus. Sambut mereka seperti pelanggan lama, karena memang iya.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>Laporan & Insight</h3>
-            <p>
-              Pahami pola kunjungan, jam tersibuk, dan performa membership
-              melalui laporan yang mudah dibaca untuk pengambilan keputusan.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📱</div>
-            <h3>Akses dari Mana Saja</h3>
-            <p>
-              Berbasis web dan responsif — bisa dibuka dari tablet di meja host,
-              komputer kasir, maupun ponsel manajer.
+          <div>
+            <div class="problem-list">
+              <div class="problem-item">
+                <div class="mark">1</div>
+                <p>
+                  <strong>Tamu walk-in numpuk di depan host</strong>, dicatat
+                  manual di kertas, staf kewalahan pas weekend ramai.
+                </p>
+              </div>
+              <div class="problem-item">
+                <div class="mark">2</div>
+                <p>
+                  <strong>Data reservasi tersebar</strong>, sebagian di
+                  WhatsApp, sebagian di buku, sebagian cuma di ingatan staf
+                  shift pagi.
+                </p>
+              </div>
+              <div class="problem-item">
+                <div class="mark">3</div>
+                <p>
+                  <strong>Tamu setia diperlakukan seperti orang baru</strong>,
+                  nggak ada catatan siapa yang sering datang, siapa yang member.
+                </p>
+              </div>
+              <div class="problem-item">
+                <div class="mark">4</div>
+                <p>
+                  <strong>Manajer nggak punya gambaran besar</strong>, sulit
+                  tahu jam tersibuk, tamu mana yang paling royal, atau performa
+                  promo bulan ini.
+                </p>
+              </div>
+            </div>
+            <p class="problem-punch">
+              Kami bikin SIRKEL supaya restoran
+              <em>nggak pernah lagi kehilangan jejak tamunya</em>, sesibuk apa
+              pun malam itu.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== CARA KERJA ===== -->
-    <section id="cara-kerja" class="how">
+    <!-- ===== CORE FEATURES ===== -->
+    <section id="fitur">
       <div class="container">
         <div class="section-head">
+          <p class="eyebrow">Fitur Utama</p>
+          <h2>Semua yang Restoran Anda Butuhkan</h2>
+          <p>
+            Dari tamu datang sampai jadi pelanggan setia, SIRKEL menangani
+            seluruh perjalanannya dalam satu tempat.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon gold">⚡</div>
+            <h3>Walk-In Tercepat</h3>
+            <p>
+              Cukup nama & jumlah pax, tamu langsung tercatat dalam hitungan
+              detik. Detail lain, meja, kontak, catatan, bisa menyusul kapan
+              saja, tanpa bikin antrean di depan host.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🗂️</div>
+            <h3>Dashboard All-in-One</h3>
+            <p>
+              Reservasi hari ini, walk-in, okupansi area, tamu yang diharapkan
+              datang, sampai tamu yang ulang tahun bulan ini, semua kelihatan
+              dari satu layar.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon dark">🗃️</div>
+            <h3>Data Tamu yang Nggak Hilang</h3>
+            <p>
+              Setiap reservasi, walk-in, dan profil tamu tersimpan rapi di satu
+              tempat, jadi restoran Anda nggak pernah lagi kehilangan riwayat
+              kunjungan pelanggan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURE SPOTLIGHT ===== -->
+    <section id="tampilan" style="padding-top: 0">
+      <div class="container">
+        <!-- Spotlight 1: Fast Walk-In -->
+        <div class="spotlight">
+          <div class="spotlight-text">
+            <span class="spotlight-tag">Walk-In</span>
+            <h3>Walk-in tercepat, buat saat restoran lagi paling sibuk</h3>
+            <p>
+              Saat antrean mengular di depan host, waktu adalah segalanya. Form
+              Quick Walk-In cuma butuh nama tamu, sisanya (kontak, jumlah pax,
+              area) bisa dilengkapi belakangan tanpa membuat tamu menunggu.
+            </p>
+            <ul>
+              <li>
+                <span class="chk">✓</span> Satu form, dua kolom wajib isi saja
+              </li>
+              <li>
+                <span class="chk">✓</span> Langsung muncul di daftar walk-in
+                hari itu
+              </li>
+              <li>
+                <span class="chk">✓</span> Bisa dilengkapi kapan saja saat lebih
+                senggang
+              </li>
+            </ul>
+          </div>
+          <figure class="spotlight-visual-wrap">
+            <!-- Screenshot asli fitur Quick Walk-In dari dashboard SIRKEL -->
+            <div class="img-placeholder spotlight-visual contain">
+              <img
+                src="assets/dashboard-walkin-crop.png"
+                alt="Screenshot fitur Quick Walk-In di dashboard SIRKEL"
+              />
+            </div>
+            <figcaption>
+              Quick Walk-In, dari nama tamu ke tercatat, dalam hitungan detik
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Spotlight 2: All-in-one dashboard -->
+        <div class="spotlight reverse">
+          <div class="spotlight-text">
+            <span class="spotlight-tag">Dashboard</span>
+            <h3>Satu layar untuk lihat semua yang terjadi hari ini</h3>
+            <p>
+              Staf bisa menambahkan walk-in manual atau cepat, membuat reservasi
+              baru, dan mengecek detail meja, semua dari dashboard yang sama.
+              Manajer bisa langsung lihat okupansi, tamu yang diharapkan datang,
+              dan siapa yang berulang tahun bulan ini.
+            </p>
+            <ul>
+              <li>
+                <span class="chk">✓</span> Reservasi mendatang & walk-in hari
+                ini dalam satu layar
+              </li>
+              <li>
+                <span class="chk">✓</span> Okupansi area & jumlah tamu yang
+                diharapkan datang
+              </li>
+              <li>
+                <span class="chk">✓</span> Notifikasi tamu yang berulang tahun
+                bulan ini
+              </li>
+            </ul>
+          </div>
+          <figure class="spotlight-visual-wrap">
+            <!-- Screenshot asli halaman Dashboard SIRKEL -->
+            <div class="img-placeholder spotlight-visual contain">
+              <img
+                src="assets/dashboard.png"
+                alt="Screenshot dashboard utama SIRKEL"
+              />
+            </div>
+            <figcaption>
+              Dashboard, reservasi, walk-in, dan okupansi dalam satu tempat
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Spotlight 3: Membership -->
+        <div class="spotlight">
+          <div class="spotlight-text">
+            <span class="spotlight-tag">Membership</span>
+            <h3>Kenali tamu setia Anda, setiap kali mereka datang</h3>
+            <p>
+              Lacak kartu member keluarga & perusahaan, stiker loyalitas, dan
+              voucher yang masih berlaku, supaya tamu yang sering datang merasa
+              dikenali, bukan diperlakukan seperti tamu baru.
+            </p>
+            <ul>
+              <li>
+                <span class="chk">✓</span> Member perorangan, keluarga, maupun
+                perusahaan
+              </li>
+              <li>
+                <span class="chk">✓</span> Progres stiker & voucher yang masih
+                aktif
+              </li>
+              <li>
+                <span class="chk">✓</span> Pencarian cepat via nama, nomor
+                member, atau telepon
+              </li>
+            </ul>
+          </div>
+          <figure class="spotlight-visual-wrap">
+            <!-- Screenshot asli halaman Membership SIRKEL -->
+            <div class="img-placeholder spotlight-visual contain">
+              <img
+                src="assets/membership.png"
+                alt="Screenshot halaman Membership SIRKEL"
+              />
+            </div>
+            <figcaption>
+              Membership, kartu keluarga & perusahaan, stiker, dan voucher
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MORE FEATURES ===== -->
+    <section class="more-features seam seam-from-cream">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Selengkapnya</p>
+          <h2>Dan Masih Banyak Lagi</h2>
+          <p>
+            Fitur pendukung supaya operasional dan keputusan bisnis Anda lebih
+            terarah.
+          </p>
+        </div>
+        <div class="more-grid">
+          <div class="more-item">
+            <div class="more-icon">📊</div>
+            <div>
+              <h4>Laporan Marketing, Operasional & Spending</h4>
+              <p>
+                Pola kunjungan, tamu baru vs. kembali, leaderboard top spender,
+                sampai performa promo, siap dibaca kapan saja.
+              </p>
+            </div>
+          </div>
+          <div class="more-item">
+            <div class="more-icon">🎁</div>
+            <div>
+              <h4>Promosi & Hadiah</h4>
+              <p>
+                Buat promo dengan hadiah tertentu untuk mendorong kunjungan di
+                jam atau musim yang lebih sepi.
+              </p>
+            </div>
+          </div>
+          <div class="more-item">
+            <div class="more-icon">📄</div>
+            <div>
+              <h4>Detail Reservasi yang Bisa Diunduh</h4>
+              <p>
+                Tamu bisa menerima dan mengunduh detail reservasinya sendiri,
+                jelas, rapi, tanpa perlu telepon bolak-balik.
+              </p>
+            </div>
+          </div>
+          <div class="more-item">
+            <div class="more-icon">🧾</div>
+            <div>
+              <h4>Riwayat Tamu Terpusat</h4>
+              <p>
+                Reservasi, walk-in, dan profil tamu tersimpan di satu tempat,
+                restoran nggak pernah kehilangan data tamunya lagi.
+              </p>
+            </div>
+          </div>
+          <div class="more-item">
+            <div class="more-icon">🎂</div>
+            <div>
+              <h4>Pengingat Ulang Tahun Tamu</h4>
+              <p>
+                Tahu siapa saja tamu yang berulang tahun bulan ini, momen yang
+                pas untuk sentuhan personal.
+              </p>
+            </div>
+          </div>
+          <div class="more-item">
+            <div class="more-icon">📱</div>
+            <div>
+              <h4>Akses dari Mana Saja</h4>
+              <p>
+                Berbasis web dan responsif, terbuka dari tablet host, komputer
+                kasir, maupun ponsel manajer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CARA KERJA ===== -->
+    <section id="cara-kerja" class="how seam seam-from-bg-alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Cara Kerja</p>
           <h2>Mulai dalam 3 Langkah</h2>
           <p>
             Tanpa instalasi rumit. Tim kami mendampingi proses onboarding Anda.
@@ -680,8 +1290,8 @@
             <div class="step-num">1</div>
             <h3>Konsultasi</h3>
             <p>
-              Hubungi tim sales kami. Kami pelajari alur operasional restoran
-              Anda dan rekomendasikan setup yang paling sesuai.
+              Ceritakan alur operasional restoran Anda. Kami rekomendasikan
+              setup dashboard, area, dan program membership yang paling sesuai.
             </p>
           </div>
           <div class="step">
@@ -689,7 +1299,8 @@
             <h3>Setup & Pelatihan</h3>
             <p>
               Kami siapkan sistem sesuai kebutuhan Anda, lalu latih staf hingga
-              percaya diri menggunakannya di operasional harian.
+              percaya diri memakai Quick Walk-In dan dashboard di operasional
+              harian.
             </p>
           </div>
           <div class="step">
@@ -704,63 +1315,25 @@
       </div>
     </section>
 
-    <!-- ===== SCREENSHOT ===== -->
-    <section id="tampilan">
+    <!-- ===== KEUNGGULAN ===== -->
+    <section id="keunggulan" class="seam seam-from-white">
       <div class="container">
         <div class="section-head">
-          <h2>Lihat SIRKEL Beraksi</h2>
+          <p class="eyebrow">Kenapa SIRKEL</p>
+          <h2>Dibangun untuk Ritme Kerja Restoran</h2>
           <p>
-            Antarmuka yang bersih dan mudah dipahami — staf baru pun cepat
-            terbiasa.
+            Bukan software korporat yang ribet, SIRKEL dirancang mengikuti cara
+            restoran benar-benar bekerja.
           </p>
         </div>
-        <div class="shots-grid">
-          <figure class="shot">
-            <!-- PLACEHOLDER: Screenshot halaman guest book / daftar reservasi dari gms-proto. Rasio 16:10. -->
-            <div class="img-placeholder">
-              <img src="assets/dashboard.png" alt="Screenshot Guest Book" />
-            </div>
-            <figcaption>
-              Guest Book — semua reservasi hari ini dalam satu layar
-            </figcaption>
-          </figure>
-          <figure class="shot">
-            <!-- PLACEHOLDER: Screenshot halaman membership / profil tamu dari gms-proto. Rasio 16:10. -->
-            <div class="img-placeholder">
-              <img src="assets/membership.png" alt="Screenshot Membership" />
-            </div>
-            <figcaption>
-              Membership — riwayat kunjungan dan status member
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== KEUNGGULAN ===== -->
-    <section id="keunggulan">
-      <div class="container benefits-grid">
-        <!-- PLACEHOLDER: Foto suasana restoran yang ramai namun teratur, atau staf yang tersenyum melayani tamu. Orientasi portrait 3:4. -->
-        <div class="img-placeholder benefit-visual">
-          <image
-            src="assets/ramai.png"
-            alt="Suasana restoran yang ramai namun teratur"
-          />
-        </div>
-        <div>
-          <div
-            class="section-head"
-            style="text-align: left; margin-bottom: 32px"
-          >
-            <h2>Mengapa Restoran Memilih SIRKEL</h2>
-          </div>
+        <div class="benefits-grid">
           <div class="benefit-item">
             <div class="benefit-check">✓</div>
             <div>
               <h3>Sederhana untuk Staf</h3>
               <p>
-                Didesain untuk operasional restoran yang serba cepat. Tidak
-                butuh pelatihan berminggu-minggu.
+                Didesain untuk operasional yang serba cepat. Tidak butuh
+                pelatihan berminggu-minggu untuk mulai dipakai.
               </p>
             </div>
           </div>
@@ -769,18 +1342,18 @@
             <div>
               <h3>Satu Sistem, Bukan Lima</h3>
               <p>
-                Reservasi, walk in, dan membership tergabung dalam satu platform
-                — tidak perlu berpindah-pindah aplikasi.
+                Reservasi, walk-in, membership, dan laporan tergabung dalam satu
+                platform, tidak perlu berpindah-pindah aplikasi.
               </p>
             </div>
           </div>
           <div class="benefit-item">
             <div class="benefit-check">✓</div>
             <div>
-              <h3>Data Pelanggan Milik Anda</h3>
+              <h3>Data Tamu Milik Anda</h3>
               <p>
-                Seluruh data tamu dan member adalah aset restoran Anda, bukan
-                platform pihak ketiga.
+                Seluruh riwayat tamu dan member adalah aset restoran Anda
+                sendiri, tersimpan aman dan bisa diakses kapan saja.
               </p>
             </div>
           </div>
@@ -789,7 +1362,7 @@
             <div>
               <h3>Didampingi Tim Lokal</h3>
               <p>
-                Onboarding, pelatihan staf, dan support dalam Bahasa Indonesia —
+                Onboarding, pelatihan staf, dan support dalam Bahasa Indonesia,
                 kami memahami operasional restoran di sini.
               </p>
             </div>
@@ -798,30 +1371,104 @@
       </div>
     </section>
 
-    <!-- ===== TESTIMONIAL ===== -->
-    <section class="testi">
-      <div class="container testi-card">
-        <!-- PLACEHOLDER: Ganti dengan testimonial asli dari klien pertama. Jika belum ada, section ini bisa disembunyikan dulu. -->
-        <blockquote>
-          "Sejak pakai SIRKEL, tim kami tidak lagi kewalahan di jam makan malam.
-          Reservasi rapi, tamu member langsung dikenali begitu datang."
-        </blockquote>
-        <div class="testi-person">
-          <!-- PLACEHOLDER: Foto profil pemberi testimoni, lingkaran 56x56. -->
-          <div class="img-placeholder">[Foto]</div>
-          <div style="text-align: left">
-            <strong>Sito, Operational Manager</strong>
-            <span>Blue Heron Yogyakarta</span>
+    <!-- ===== TESTIMONIAL (template, isi setelah ada testimoni asli) ===== -->
+    <section class="testi seam seam-from-cream">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Testimoni</p>
+          <h2>Kata Mereka yang Sudah Pakai</h2>
+        </div>
+        <!-- PLACEHOLDER: Ganti seluruh kotak ini dengan testimoni asli begitu ada pelanggan yang bersedia memberi kutipan. Jangan publish kutipan/nama sebelum ada persetujuan eksplisit dari pemberi testimoni. -->
+        <div class="testi-card">
+          <blockquote>
+            "[Tulis kutipan testimoni asli di sini setelah ada restoran yang
+            memakai SIRKEL dan bersedia memberi review.]"
+          </blockquote>
+          <div class="testi-person">
+            <div class="img-placeholder">[Foto]</div>
+            <div style="text-align: left">
+              <strong>[Nama Pemberi Testimoni]</strong>
+              <span>[Jabatan, Nama Restoran]</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="seam seam-from-bg-alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2>Pertanyaan yang Sering Ditanyakan</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>
+              Apakah data tamu kami aman?<span class="arrow">▾</span>
+            </summary>
+            <p>
+              Data reservasi, walk-in, dan member disimpan di database milik
+              restoran Anda sendiri, bukan dibagikan ke pihak ketiga. Akses
+              staf diatur berdasarkan peran masing-masing.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              Berapa lama staf butuh untuk terbiasa memakai SIRKEL?<span
+                class="arrow"
+                >▾</span
+              >
+            </summary>
+            <p>
+              Alur inti, Quick Walk-In dan input reservasi, dirancang
+              sederhana, biasanya staf sudah nyaman dalam sekali shift
+              pelatihan. Tim kami mendampingi sampai staf percaya diri.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              Apakah bisa dipakai di lebih dari satu perangkat sekaligus?<span
+                class="arrow"
+                >▾</span
+              >
+            </summary>
+            <p>
+              Bisa. SIRKEL berbasis web, jadi bisa dibuka bersamaan dari tablet
+              host, komputer kasir, dan ponsel manajer, datanya tetap sinkron
+              secara real-time.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              Bagaimana kalau kami sudah punya data tamu dari sistem lama?<span
+                class="arrow"
+                >▾</span
+              >
+            </summary>
+            <p>
+              Tim kami bisa membantu proses migrasi data pada tahap onboarding,
+              supaya riwayat tamu dan member lama Anda tidak hilang.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              Berapa biaya berlangganan SIRKEL?<span class="arrow">▾</span>
+            </summary>
+            <p>
+              Biaya menyesuaikan skala dan kebutuhan restoran Anda. Hubungi tim
+              kami untuk konsultasi dan penawaran yang sesuai.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== CTA / KONTAK ===== -->
-    <section id="kontak" style="padding-top: 32px">
+    <section id="kontak" style="padding-top: 24px">
       <div class="container">
         <div class="cta-section">
-          <h2>Siap Meningkatkan Pengalaman Tamu Anda?</h2>
+          <h2>Siap Nggak Pernah Lagi Kehilangan Jejak Tamu?</h2>
           <p>
             Ceritakan kebutuhan restoran Anda kepada tim kami. Kami akan
             menyiapkan demo dan penawaran yang disesuaikan dengan skala bisnis
@@ -836,11 +1483,11 @@
               rel="noopener"
               >Chat via WhatsApp</a
             >
-            <!-- <a
+            <a
               class="btn btn-outline"
               href="mailto:sales@sirkel.app?subject=Inquiry%20SIRKEL"
-              >Email Tim Sales</a
-            > -->
+              >Email Tim Kami</a
+            >
           </div>
         </div>
       </div>
@@ -849,10 +1496,11 @@
     <!-- ===== FOOTER ===== -->
     <footer>
       <div class="container footer-inner">
-        <img src="assets/sirkel.png" alt="SIRKEL logo" />
+        <img src="assets/sirkel-new-logo.png" alt="SIRKEL logo" />
         <div class="footer-links">
           <a href="#fitur">Fitur</a>
           <a href="#cara-kerja">Cara Kerja</a>
+          <a href="#faq">FAQ</a>
           <a href="#kontak">Kontak</a>
         </div>
         <p>© 2026 SIRKEL. Hak cipta dilindungi.</p>
