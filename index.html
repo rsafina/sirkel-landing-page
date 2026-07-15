@@ -18,9 +18,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
     <style>
       :root {
         --bg: #fbf8f2;
@@ -55,9 +58,9 @@
       h1,
       h2,
       h3 {
-        font-family: "Cormorant Garamond", serif;
-        line-height: 1.15;
-        font-weight: 700;
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.12;
+        font-weight: 800;
         color: var(--primary-dark);
       }
       img {
@@ -157,25 +160,13 @@
         background: rgba(255, 255, 255, 0.98);
       }
 
-      .value-strip-item {
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease,
-          border-color 0.25s ease;
-      }
-      .value-strip-item:hover {
-        transform: translateY(-4px);
-        box-shadow:
-          0 16px 30px rgba(40, 84, 124, 0.12),
-          0 0 18px rgba(255, 255, 255, 0.34);
-      }
-
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
         }
         .reveal,
-        .reveal-stagger > * {
+        .reveal-stagger > *,
+        .js .hero-media {
           opacity: 1 !important;
           transform: none !important;
           transition: none !important;
@@ -314,20 +305,20 @@
         pointer-events: none;
       }
       .hero {
-        padding: 82px 0 78px;
+        padding: 82px 0 96px;
         position: relative;
         z-index: 1;
       }
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
-        gap: 72px;
+        grid-template-columns: minmax(0, 1.08fr) minmax(390px, 0.92fr);
+        gap: 44px;
         align-items: center;
         position: relative;
         z-index: 1;
       }
       .hero-copy {
-        max-width: 560px;
+        max-width: 680px;
       }
       .eyebrow {
         display: inline-block;
@@ -357,6 +348,9 @@
         color: #b98536;
         font-style: normal;
       }
+      .hero-title-lock {
+        white-space: nowrap;
+      }
       .hero h2 {
         max-width: 520px;
         margin: 0 0 22px;
@@ -383,33 +377,62 @@
       }
       .hero-media {
         position: relative;
-        min-height: 440px;
+        min-height: 560px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 22px 0;
+        margin-left: -34px;
+        padding: 18px 0 26px;
+        transition:
+          opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .js .hero-media {
+        opacity: 0;
+        transform: translateX(28px) scale(0.985);
+      }
+      .js .hero-media.is-visible {
+        opacity: 1;
+        transform: none;
       }
       .hero-media::before {
         content: "";
         position: absolute;
-        inset: 4% 9% 7% 7%;
-        border-radius: 34% 18% 31% 16%;
+        inset: 3% 16% 8% 13%;
+        border-radius: 34% 24% 30% 18%;
         background: linear-gradient(
           135deg,
-          rgba(147, 229, 214, 0.72),
-          rgba(203, 186, 246, 0.56)
+          rgba(155, 232, 214, 0.82),
+          rgba(205, 190, 248, 0.62)
         );
         transform: rotate(-2deg);
         box-shadow: 0 28px 80px rgba(40, 84, 124, 0.16);
       }
       .hero-visual {
-        width: min(560px, 100%);
-        aspect-ratio: 4/3;
+        width: min(430px, 78%);
+        aspect-ratio: 0.82;
         background: rgba(255, 255, 255, 0.48);
-        box-shadow: 0 22px 46px rgba(40, 84, 124, 0.18);
-        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 42px 42px 120px 42px;
+        box-shadow:
+          0 26px 56px rgba(40, 84, 124, 0.2),
+          0 10px 28px rgba(185, 133, 54, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.68);
         backdrop-filter: blur(8px);
         z-index: 1;
+      }
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 22% 78%,
+          rgba(255, 223, 122, 0.2),
+          rgba(255, 223, 122, 0) 38%
+        );
+        pointer-events: none;
+      }
+      .hero-visual img {
+        object-position: center top;
       }
       .hero-note {
         color: rgba(255, 255, 255, 0.86);
@@ -433,6 +456,27 @@
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
       }
+      .metric-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .metric-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #173b5f;
+        background: rgba(255, 255, 255, 0.62);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+      .metric-icon svg {
+        width: 17px;
+        height: 17px;
+      }
       .hero-metric .metric-label {
         color: rgba(48, 91, 130, 0.72);
         font-size: 0.74rem;
@@ -448,96 +492,25 @@
         font-size: 0.78rem;
       }
       .hero-metric.top {
-        top: 22px;
-        right: -6px;
+        top: 40px;
+        right: 6px;
+        min-width: 174px;
+        padding: 18px 20px;
         background: rgba(227, 213, 255, 0.78);
       }
       .hero-metric.bottom {
-        left: -4px;
-        bottom: 30px;
+        left: 12px;
+        bottom: 72px;
+        min-width: 160px;
+        padding: 20px 18px;
         background: rgba(255, 229, 190, 0.78);
       }
       .hero-metric.side {
-        right: 18px;
-        bottom: 4px;
+        right: 0;
+        bottom: 110px;
+        min-width: 188px;
+        padding: 16px 18px;
         background: rgba(221, 247, 241, 0.78);
-      }
-
-      /* ===== Value strip ===== */
-      .value-strip {
-        position: relative;
-        z-index: 1;
-        background: transparent;
-        padding: 28px 0 44px;
-      }
-      .value-strip-holo {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-        border-radius: 18px;
-        overflow: hidden;
-        padding: 22px;
-        background: transparent;
-      }
-      .value-strip-item {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 10px;
-        color: var(--text);
-        font-size: 0.85rem;
-        font-weight: 500;
-        line-height: 1.35;
-        padding: 18px 12px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.76);
-        box-shadow:
-          0 10px 24px rgba(40, 84, 124, 0.07),
-          inset 0 1px 0 rgba(255, 255, 255, 0.66);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-      .value-strip-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--gold-dark, #a97b1f);
-      }
-      .value-strip-icon svg {
-        width: 22px;
-        height: 22px;
-      }
-      .value-strip-item:nth-child(1) .value-strip-icon {
-        color: #28547c;
-      }
-      .value-strip-item:nth-child(2) .value-strip-icon {
-        color: #6b4c7c;
-      }
-      .value-strip-item:nth-child(3) .value-strip-icon {
-        color: #a35c8c;
-      }
-      .value-strip-item:nth-child(4) .value-strip-icon {
-        color: #b8954f;
-      }
-      @media (max-width: 820px) {
-        .value-strip-holo {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 480px) {
-        .value-strip {
-          padding: 24px 0;
-        }
-        .value-strip-holo {
-          grid-template-columns: 1fr;
-          gap: 10px;
-          padding: 16px;
-        }
       }
 
       /* ===== Seamless section transitions =====
@@ -608,7 +581,9 @@
         margin-bottom: 10px;
       }
       .section-head h2 {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        font-weight: 800;
+        letter-spacing: 0;
         margin-bottom: 14px;
       }
       .section-head p {
@@ -682,9 +657,10 @@
       }
       .problem-punch {
         margin-top: 28px;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.5;
         color: var(--primary-dark);
       }
       .problem-punch em {
@@ -878,7 +854,7 @@
         font-weight: 700;
         font-size: 1.15rem;
         margin: 0 auto 18px;
-        font-family: "Cormorant Garamond", serif;
+        font-family: "DM Sans", sans-serif;
       }
       .step h3 {
         font-size: 1.35rem;
@@ -942,9 +918,11 @@
         backdrop-filter: blur(8px);
       }
       .testi-card blockquote {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1.5rem;
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
         font-style: italic;
+        line-height: 1.5;
         margin-bottom: 22px;
         color: var(--text-sec);
       }
@@ -1075,39 +1053,101 @@
 
       /* ===== Mobile ===== */
       @media (max-width: 820px) {
+        .hero {
+          padding: 48px 0 54px;
+        }
+        .hero-grid {
+          gap: 34px;
+        }
+        .hero-copy {
+          order: 1;
+          max-width: 560px;
+          text-align: center;
+          margin: 0 auto;
+        }
         .hero h1 {
-          font-size: clamp(2.45rem, 11vw, 3.4rem);
+          font-size: clamp(2.35rem, 10vw, 3.25rem);
+          max-width: 560px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .hero-title-lock {
+          white-space: normal;
         }
         .hero h2 {
+          max-width: 440px;
+          margin-left: auto;
+          margin-right: auto;
           font-size: 1.08rem;
           margin-bottom: 18px;
         }
-        .hero-grid {
-          gap: 36px;
+        .hero p.lead {
+          max-width: 520px;
+          margin-left: auto;
+          margin-right: auto;
+          font-size: 1rem;
         }
-        .hero-copy {
-          max-width: none;
+        .hero-ctas {
+          justify-content: center;
+          margin-bottom: 0;
         }
         .hero-media {
+          order: 2;
           min-height: auto;
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 12px;
-          padding: 10px 0 0;
+          margin-left: 0;
+          padding: 8px 0 0;
+        }
+        .js .hero-media {
+          transform: translateY(18px) scale(0.985);
         }
         .hero-media::before {
-          inset: 0 8% 32%;
+          inset: 0 10% 34%;
+          border-radius: 30px 30px 82px 30px;
         }
         .hero-visual {
           grid-column: 1 / -1;
-          width: 100%;
+          width: min(78vw, 330px);
+          justify-self: center;
+          border-radius: 32px 32px 92px 32px;
         }
         .hero-metric {
           position: relative;
           inset: auto;
           min-width: 0;
-          padding: 14px;
+          padding: 13px 14px;
           border-radius: 16px;
+          text-align: left;
+        }
+        .hero-metric.top {
+          grid-column: 1 / -1;
+          width: min(100%, 280px);
+          justify-self: center;
+          top: auto;
+          right: auto;
+          bottom: auto;
+          left: auto;
+        }
+        .hero-metric.bottom,
+        .hero-metric.side {
+          grid-column: span 1;
+          top: auto;
+          right: auto;
+          bottom: auto;
+          left: auto;
+        }
+        .metric-head {
+          gap: 8px;
+        }
+        .metric-icon {
+          width: 26px;
+          height: 26px;
+        }
+        .metric-icon svg {
+          width: 14px;
+          height: 14px;
         }
         .hero-metric strong {
           font-size: 1.2rem;
@@ -1132,9 +1172,6 @@
         .problem-visual {
           max-height: 280px;
           order: -1;
-        }
-        .value-strip .container {
-          gap: 18px;
         }
         .hamburger {
           display: block;
@@ -1181,13 +1218,41 @@
       }
       @media (max-width: 560px) {
         .hero {
-          padding: 56px 0 42px;
+          padding: 34px 0 38px;
         }
         .hero h1 {
-          font-size: clamp(2.2rem, 12vw, 2.9rem);
+          font-size: clamp(2.05rem, 12vw, 2.7rem);
+        }
+        .hero p.lead {
+          font-size: 0.96rem;
+        }
+        .hero-ctas {
+          gap: 10px;
+        }
+        .hero-ctas .btn {
+          width: 100%;
+          justify-content: center;
         }
         .hero-media {
           grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .hero-media::before {
+          inset: 0 6% 44%;
+        }
+        .hero-visual {
+          width: min(82vw, 280px);
+        }
+        .hero-metric.top,
+        .hero-metric.bottom,
+        .hero-metric.side {
+          grid-column: 1;
+          width: min(100%, 280px);
+          justify-self: center;
+          top: auto;
+          right: auto;
+          bottom: auto;
+          left: auto;
         }
       }
     </style>
@@ -1224,7 +1289,10 @@
         <div class="container hero-grid">
           <div class="hero-copy">
             <!-- <p class="eyebrow">Guest & Membership Management</p> -->
-            <h1><em>Kenali</em> Pelanggan Resto Anda</h1>
+            <h1>
+              <span class="hero-title-lock"><em>Kenali Pelanggan</em></span>
+              Resto Anda
+            </h1>
             <h2>Cari tahu siapa dan seberapa sering mereka kembali.</h2>
             <p class="lead">
               Ciptakan pengalaman yang lebih personal. SIRKEL menyatukan data
@@ -1236,107 +1304,81 @@
               <a href="#fitur" class="btn btn-outline">Lihat Fitur</a>
             </div>
           </div>
-          <!-- PLACEHOLDER: Gambar hero, host/staff restoran menyambut tamu sambil memegang tablet berisi SIRKEL, atau mockup dashboard di laptop. Rasio 4:3. Bisa diganti dengan AI image nanti. -->
+          <!-- Hero portrait visual with floating product metrics. -->
           <div class="hero-media">
             <div class="img-placeholder hero-visual">
               <img
-                src="assets/hero.png"
-                alt="Host restoran menyambut tamu sambil membawa tablet SIRKEL"
+                src="assets/hero-new.png"
+                alt="Pengguna SIRKEL membawa laptop dengan dashboard restoran"
               />
             </div>
             <div class="hero-metric top">
-              <span class="metric-label">Repeat Guests</span>
+              <div class="metric-head">
+                <span class="metric-label">Repeat Guests</span>
+                <span class="metric-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 2v4" />
+                    <path d="M7 2v4" />
+                    <rect x="3" y="4" width="18" height="18" rx="3" />
+                    <path d="M3 10h18" />
+                    <path d="m9 16 2 2 4-4" />
+                  </svg>
+                </span>
+              </div>
               <strong>64%</strong>
               <span>naik bulan ini</span>
             </div>
             <div class="hero-metric bottom">
-              <span class="metric-label">Kunjungan</span>
+              <div class="metric-head">
+                <span class="metric-label">Kunjungan</span>
+                <span class="metric-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m3 17 6-6 4 4 8-8" />
+                    <path d="M14 7h7v7" />
+                  </svg>
+                </span>
+              </div>
               <strong>+32%</strong>
               <span>dari member aktif</span>
             </div>
             <div class="hero-metric side">
-              <span class="metric-label">Birthday Alerts</span>
+              <div class="metric-head">
+                <span class="metric-label">Birthday Alerts</span>
+                <span class="metric-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2c1.5 2 1.5 3.5 0 5-1.5-1.5-1.5-3 0-5Z" />
+                    <path d="M5 21V13a7 7 0 0 1 14 0v8" />
+                    <path d="M5 17h14" />
+                  </svg>
+                </span>
+              </div>
               <strong>18</strong>
               <span>tamu minggu ini</span>
             </div>
           </div>
         </div>
       </header>
-
-      <!-- ===== VALUE STRIP ===== -->
-      <div class="value-strip seam seam-from-cream">
-        <div class="container">
-          <div class="value-strip-holo">
-            <div class="value-strip-item">
-              <span class="value-strip-icon" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 7v5l3 3" />
-                </svg>
-              </span>
-              Walk-in tercatat dalam hitungan detik
-            </div>
-            <div class="value-strip-item">
-              <span class="value-strip-icon" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="4" width="18" height="16" rx="2" />
-                  <path d="M3 10h18M8 2v4M16 2v4" />
-                </svg>
-              </span>
-              Reservasi &amp; walk-in dalam satu layar
-            </div>
-            <div class="value-strip-item">
-              <span class="value-strip-icon" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 2c1.5 2 1.5 3.5 0 5-1.5-1.5-1.5-3 0-5Z" />
-                  <path d="M5 21V13a7 7 0 0 1 14 0v8" />
-                  <path d="M5 17h14" />
-                </svg>
-              </span>
-              Tidak pernah lupa ulang tahun tamu
-            </div>
-            <div class="value-strip-item">
-              <span class="value-strip-icon" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"
-                  />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
-              </span>
-              Data tamu tersimpan aman
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- /.hero-wrap -->
 
@@ -1881,6 +1923,14 @@
     </footer>
     <script>
       (function () {
+        document.documentElement.classList.add("js");
+        var heroMedia = document.querySelector(".hero-media");
+        if (heroMedia) {
+          window.setTimeout(function () {
+            heroMedia.classList.add("is-visible");
+          }, 180);
+        }
+
         var toggle = document.getElementById("navToggle");
         var links = document.getElementById("navLinks");
         var overlay = document.getElementById("navOverlay");
@@ -1947,16 +1997,10 @@
             ".testi-card",
             ".feature-card",
           ];
-          var staggerSelectors = [".value-strip .container"];
 
           revealSelectors.forEach(function (sel) {
             document.querySelectorAll(sel).forEach(function (el) {
               el.classList.add("reveal");
-            });
-          });
-          staggerSelectors.forEach(function (sel) {
-            document.querySelectorAll(sel).forEach(function (el) {
-              el.classList.add("reveal-stagger");
             });
           });
 
