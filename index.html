@@ -739,8 +739,11 @@
       /* ===== Core features ===== */
       .features-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        /* 4 keypoints -> 2x2 on desktop, 1 column on mobile */
+        grid-template-columns: repeat(2, 1fr);
         gap: 24px;
+        max-width: 920px;
+        margin: 0 auto;
       }
       .feature-card {
         background: rgba(255, 255, 255, 0.78);
@@ -1386,10 +1389,22 @@
             <span class="lang-opt lang-opt-en">
               <svg viewBox="0 0 60 30" aria-hidden="true">
                 <rect width="60" height="30" fill="#012169" />
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="3.5" />
+                <path
+                  d="M0,0 L60,30 M60,0 L0,30"
+                  stroke="#fff"
+                  stroke-width="6"
+                />
+                <path
+                  d="M0,0 L60,30 M60,0 L0,30"
+                  stroke="#C8102E"
+                  stroke-width="3.5"
+                />
                 <path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10" />
-                <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6" />
+                <path
+                  d="M30,0 V30 M0,15 H60"
+                  stroke="#C8102E"
+                  stroke-width="6"
+                />
               </svg>
               <span>EN</span>
             </span>
@@ -1455,14 +1470,18 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+                    <path
+                      d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"
+                    />
                     <path d="M12 9v4" />
                     <path d="M12 17h.01" />
                   </svg>
                 </span>
               </div>
               <strong>10</strong>
-              <span data-i18n="metric.risk">pelanggan tidak datang 90 hari</span>
+              <span data-i18n="metric.risk"
+                >pelanggan tidak datang 90 hari</span
+              >
             </div>
             <div class="hero-metric top">
               <div class="metric-head">
@@ -1548,11 +1567,11 @@
             Kedengaran Familiar?
           </p>
           <h2 data-i18n="problem.title">
-            Ini yang biasanya terjadi tanpa sistem yang tepat
+            Kalau Hubungan dengan Pelanggan Cuma Sebatas Transaksi…
           </h2>
           <p data-i18n="problem.sub">
-            Kalau salah satu dari ini kejadian di restoran Anda minggu ini, Anda
-            nggak sendirian.
+            …masalah-masalah ini yang biasanya muncul. Kalau salah satunya
+            kejadian di restoran Anda minggu ini, Anda nggak sendirian.
           </p>
         </div>
         <div class="problem-grid">
@@ -1568,31 +1587,37 @@
               <div class="problem-item">
                 <div class="mark">1</div>
                 <p data-i18n="problem.i1">
-                  <strong>Tamu walk-in numpuk di depan host</strong>, dicatat
-                  manual di kertas, staf kewalahan pas weekend ramai.
+                  <strong>Data reservasi tersebar</strong>, sebagian di
+                  WhatsApp, di spreadsheet, atau di buku. Karena dianggap nggak
+                  berharga, datanya dibiarkan nggak terkumpul.
                 </p>
               </div>
               <div class="problem-item">
                 <div class="mark">2</div>
                 <p data-i18n="problem.i2">
-                  <strong>Data reservasi tersebar</strong>, sebagian di
-                  WhatsApp, sebagian di buku, sebagian cuma di ingatan staf
-                  shift pagi.
-                </p>
-              </div>
-              <div class="problem-item">
-                <div class="mark">3</div>
-                <p data-i18n="problem.i3">
                   <strong>Tamu setia diperlakukan seperti orang baru</strong>,
                   nggak ada catatan siapa yang sering datang, siapa yang member.
                 </p>
               </div>
               <div class="problem-item">
+                <div class="mark">3</div>
+                <p data-i18n="problem.i3">
+                  <strong
+                    >Pelanggan baru dapat pengalaman luar biasa, tapi nggak
+                    pernah balik.</strong
+                  >
+                  Anda bahkan nggak tahu mereka pernah datang, jadi nggak pernah
+                  di-follow-up.
+                </p>
+              </div>
+              <div class="problem-item">
                 <div class="mark">4</div>
                 <p data-i18n="problem.i4">
-                  <strong>Manajer nggak punya gambaran besar</strong>, sulit
-                  tahu jam tersibuk, tamu mana yang paling royal, atau performa
-                  promo bulan ini.
+                  <strong
+                    >Anda punya banyak leads pelanggan untuk strategi
+                    penjualan</strong
+                  >, tapi nggak punya riwayat daya beli mereka untuk membidik
+                  yang tepat.
                 </p>
               </div>
             </div>
@@ -1619,30 +1644,41 @@
         </div>
         <div class="features-grid">
           <div class="feature-card">
-            <div class="feature-icon gold">⚡</div>
-            <h3 data-i18n="features.c1t">Walk-In Tercepat</h3>
+            <div class="feature-icon gold">🔄</div>
+            <h3 data-i18n="features.c1t">
+              Kenali Siapa yang Kembali ke Outlet Anda
+            </h3>
             <p data-i18n="features.c1p">
-              Cukup nama & jumlah pax, tamu langsung tercatat dalam hitungan
-              detik. Detail lain, meja, kontak, catatan, bisa menyusul kapan
-              saja, tanpa bikin antrean di depan host.
+              Apresiasi pelanggan setia yang sudah berulang kali order, atau
+              ambil tindakan untuk menindaklanjuti pelanggan yang sudah lama
+              tidak kembali.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🗂️</div>
-            <h3 data-i18n="features.c2t">Dashboard All-in-One</h3>
+            <div class="feature-icon">💳</div>
+            <h3 data-i18n="features.c2t">Pahami Daya Beli Pelanggan Anda</h3>
             <p data-i18n="features.c2p">
-              Reservasi hari ini, walk-in, okupansi area, tamu yang diharapkan
-              datang, sampai tamu yang ulang tahun bulan ini, semua kelihatan
-              dari satu layar.
+              Dengan memahami kemampuan spending pelanggan, Anda bisa
+              menargetkan strategi penjualan yang tepat ke orang yang tepat.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon dark">🗃️</div>
-            <h3 data-i18n="features.c3t">Data Tamu yang Nggak Hilang</h3>
+            <div class="feature-icon dark">🎂</div>
+            <h3 data-i18n="features.c3t">Kenali Kebiasaan Pelanggan Anda</h3>
             <p data-i18n="features.c3p">
-              Setiap reservasi, walk-in, dan profil tamu tersimpan rapi di satu
-              tempat, jadi restoran Anda nggak pernah lagi kehilangan riwayat
-              kunjungan pelanggan.
+              Berikan layanan yang lebih personal untuk pelanggan yang kembali,
+              mulai dari momen spesial mereka (ulang tahun) sampai menu
+              favoritnya.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon gold">⭐</div>
+            <h3 data-i18n="features.c4t">
+              Optimalkan Performa Google Business Anda
+            </h3>
+            <p data-i18n="features.c4p">
+              Ajak pelanggan mengisi review positif di Google lewat cara yang
+              fun dan menarik.
             </p>
           </div>
         </div>
@@ -1657,28 +1693,36 @@
           <div class="spotlight-text">
             <span class="spotlight-tag">Walk-In</span>
             <h3 data-i18n="s1.title">
-              Walk-in tercepat, buat saat restoran lagi paling sibuk
+              Kenapa SIRKEL paham pentingnya walk-in yang cepat
             </h3>
             <p data-i18n="s1.p">
-              Saat antrean mengular di depan host, waktu adalah segalanya. Form
-              Quick Walk-In cuma butuh nama tamu, sisanya (kontak, jumlah pax,
-              area) bisa dilengkapi belakangan tanpa membuat tamu menunggu.
+              Walk-in adalah momen di mana data pelanggan paling sering hilang,
+              nggak ada waktu mengisi form saat antrean makin panjang. Karena
+              itu SIRKEL bikin pencatatan tamu tanpa beban: cukup nama,
+              pelanggan langsung masuk sistem. Satu catatan itulah yang nanti
+              jadi riwayat kunjungan, insight spending, dan pelanggan yang
+              kembali lagi.
             </p>
             <ul>
               <li>
                 <span class="chk">✓</span>
-                <span data-i18n="s1.l1">Satu form, dua kolom wajib isi saja</span>
+                <span data-i18n="s1.l1"
+                  >Nggak membebani staf yang sibuk, satu form, dua kolom wajib
+                  saja</span
+                >
               </li>
               <li>
                 <span class="chk">✓</span>
                 <span data-i18n="s1.l2"
-                  >Langsung muncul di daftar walk-in hari itu</span
+                  >Setiap walk-in jadi data pelanggan, bukan catatan kertas yang
+                  hilang</span
                 >
               </li>
               <li>
                 <span class="chk">✓</span>
                 <span data-i18n="s1.l3"
-                  >Bisa dilengkapi kapan saja saat lebih senggang</span
+                  >Detail (kontak, jumlah pax, area) bisa menyusul saat lebih
+                  senggang</span
                 >
               </li>
             </ul>
@@ -2231,7 +2275,7 @@
           "nav.how": "How It Works",
           "nav.contact": "Contact Us",
           "nav.kontak": "Contact",
-          "hero.title": "<em>Know Every Guest</em> at Your Resto",
+          "hero.title": "<em>Recognize Your</em> Restaurant Customers",
           "hero.sub": "Find out who they are and how often they come back.",
           "hero.lead":
             "Create a more personal experience. SIRKEL brings reservation, walk-in, and member data together in one dashboard, so you always recognize your guests, their preferences, and their visit history.",
@@ -2244,39 +2288,44 @@
           "metric.birthday": "guests this week",
           "problem.eyebrow": "Sound Familiar?",
           "problem.title":
-            "This is what usually happens without the right system",
+            "When Your Customer Relationship Is Purely Transactional…",
           "problem.sub":
-            "If any of these happened at your restaurant this week, you're not alone.",
+            "…these are the problems you're likely to face. If any of them happened at your restaurant this week, you're not alone.",
           "problem.i1":
-            "<strong>Walk-in guests pile up at the host stand</strong>, logged manually on paper, staff overwhelmed on busy weekends.",
+            "<strong>Reservation data is scattered</strong>, some on WhatsApp, in spreadsheets, or in the book. Because it never looks valuable, it's left uncollected.",
           "problem.i2":
-            "<strong>Reservation data is scattered</strong>, some on WhatsApp, some in a book, some only in the morning-shift staff's memory.",
+            "<strong>Loyal customers get treated like strangers</strong>, no record of who visits often or who's a member.",
           "problem.i3":
-            "<strong>Loyal guests get treated like strangers</strong>, no record of who visits often or who's a member.",
+            "<strong>New customers get a wonderful experience, but never return.</strong> You don't even know they ever came, so you never follow up.",
           "problem.i4":
-            "<strong>Managers lack the big picture</strong>, hard to know peak hours, top-spending guests, or this month's promo performance.",
+            "<strong>You have the customer leads for your sales strategy</strong>, but no history of their spending power to target the right ones.",
           "problem.punch":
             "We built SIRKEL so restaurants <em>never lose track of their guests again</em>, no matter how busy the night gets.",
           "features.eyebrow": "Core Features",
           "features.title": "Everything Your Restaurant Needs",
           "features.sub":
             "From first visit to loyal regular, SIRKEL handles the whole journey in one place.",
-          "features.c1t": "Fastest Walk-In",
+          "features.c1t": "Know Who Returns to Your Outlet",
           "features.c1p":
-            "Just a name & party size, guests are logged in seconds. Other details, table, contact, notes, can follow anytime, without creating a queue at the host stand.",
-          "features.c2t": "All-in-One Dashboard",
+            "Appreciate your loyal customers who have repeatedly ordered, or take the necessary actions to follow up with ones who haven't returned in a while.",
+          "features.c2t": "Acknowledge Your Customer's Spending Power",
           "features.c2p":
-            "Today's reservations, walk-ins, area occupancy, expected guests, even this month's birthdays, all visible from a single screen.",
-          "features.c3t": "Guest Data That Never Gets Lost",
+            "By acknowledging their spending capabilities, you can target the right sales strategy to the right person.",
+          "features.c3t": "Recognize Your Customer's Behaviors",
           "features.c3p":
-            "Every reservation, walk-in, and guest profile is stored neatly in one place, so your restaurant never loses a customer's visit history again.",
-          "s1.title":
-            "The fastest walk-in, for when your restaurant is at its busiest",
+            "Provide more personal service to returning customers, from their special occasions (birthdays) to their favorite menu.",
+          "features.c4t": "Optimize Your Google Business Performance",
+          "features.c4p":
+            "Make your customers fill in positive Google reviews in a fun and attractive way.",
+          "s1.title": "Why SIRKEL knows a quick walk-in matters",
           "s1.p":
-            "When the queue snakes past the host stand, every second counts. The Quick Walk-In form only needs the guest's name, the rest (contact, party size, area) can be completed later without keeping guests waiting.",
-          "s1.l1": "One form, only two required fields",
-          "s1.l2": "Instantly appears in today's walk-in list",
-          "s1.l3": "Complete the details anytime, when things calm down",
+            "Walk-ins are where customer data slips away the most, nobody has time to fill out forms while the queue keeps growing. So SIRKEL makes capturing a guest effortless: just a name, and the customer is in the system. That one record is what later becomes visit history, spending insight, and a customer who comes back.",
+          "s1.l1":
+            "No burden on busy staff, one form with only two required fields",
+          "s1.l2":
+            "Every walk-in becomes a customer record, not a lost paper note",
+          "s1.l3":
+            "Details (contact, party size, area) can follow when things calm down",
           "s1.cap": "Quick Walk-In, from guest name to logged, in seconds",
           "s2.title": "One screen to see everything happening today",
           "s2.p":
@@ -2376,8 +2425,7 @@
 
         var META = {
           id: {
-            title:
-              "SIRKEL, Sistem Manajemen Tamu & Membership untuk Restoran",
+            title: "SIRKEL, Sistem Manajemen Tamu & Membership untuk Restoran",
             desc: "SIRKEL membantu restoran mengelola reservasi, walk-in, dan program membership dalam satu dashboard. Hubungi tim kami untuk demo.",
             wa: "https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20SIRKEL%20untuk%20restoran%20saya.",
           },
